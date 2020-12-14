@@ -13,18 +13,19 @@ import java.nio.file.Paths;
 
 import com.github.opendevl.JFlat;
 
-public class Excel2Json {
+public class Utility {
 
 	public static void main(String[] args) throws Exception {
-		getExcelDataAsJsonObject();
-		Excel2Json json2csv = new Excel2Json();
-	        String str = new String(Files.readAllBytes(Paths.get("Sensor.json")));
-	        json2csv.JsonToExcel(str);
+
+		Utility json2csv = new Utility();
+		String str = new String(Files.readAllBytes(Paths.get("Sensor.json")));
+		json2csv.JsonToExcel(str);
+		ExcelToJson();
 	}
 
 //	ExcelToJson Converter
 	@SuppressWarnings("unchecked")
-	public static JSONObject getExcelDataAsJsonObject() {
+	public static JSONObject ExcelToJson() {
 		JSONObject sheetsJsonObject = new JSONObject();
 		XSSFWorkbook workbook = null;
 		String sourceFilePath = "Sensor.xlsx";
@@ -83,20 +84,20 @@ public class Excel2Json {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.print("Data saved!!");
+		System.out.println("Excel to Json success!!");
 		return sheetsJsonObject;
 	}
-	
+
 //	JsonToExcel Converter
 	public void JsonToExcel(String str) throws Exception {
-		
+
 		JFlat flatMe = new JFlat(str);
 
-        flatMe.json2Sheet().headerSeparator("_").getJsonAsSheet();
+		flatMe.json2Sheet().headerSeparator("_").getJsonAsSheet();
 
-        flatMe.write2csv("test2.csv");
-        
-        System.out.println("File Saved!!!");
+		flatMe.write2csv("test2.csv");
+
+		System.out.println("Json to Excel success!!");
 	}
-	
-	}
+
+}
