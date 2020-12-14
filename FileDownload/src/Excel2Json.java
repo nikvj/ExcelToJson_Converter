@@ -8,13 +8,21 @@ import org.json.simple.*;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import com.github.opendevl.JFlat;
 
 public class Excel2Json {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 		getExcelDataAsJsonObject();
+		Excel2Json json2csv = new Excel2Json();
+	        String str = new String(Files.readAllBytes(Paths.get("Sensor.json")));
+	        json2csv.JsonToExcel(str);
 	}
 
+//	ExcelToJson Converter
 	@SuppressWarnings("unchecked")
 	public static JSONObject getExcelDataAsJsonObject() {
 		JSONObject sheetsJsonObject = new JSONObject();
@@ -78,4 +86,17 @@ public class Excel2Json {
 		System.out.print("Data saved!!");
 		return sheetsJsonObject;
 	}
-}
+	
+//	JsonToExcel Converter
+	public void JsonToExcel(String str) throws Exception {
+		
+		JFlat flatMe = new JFlat(str);
+
+        flatMe.json2Sheet().headerSeparator("_").getJsonAsSheet();
+
+        flatMe.write2csv("test2.csv");
+        
+        System.out.println("File Saved!!!");
+	}
+	
+	}

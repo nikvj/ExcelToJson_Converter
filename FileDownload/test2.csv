@@ -1,0 +1,4 @@
+Reviews_device_mac,Reviews_config_id,Reviews_group_id,Reviews_name,Reviews_site_id,Reviews_id,Reviews_auth_token
+"aa",1.0,1.0,"Sensor1",1.0,1.0,0.0
+"bb",2.0,2.0,"sensor2",2.0,2.0,1.0
+"bb",2.0,2.0,"sensor3",2.0,3.0,1.0
