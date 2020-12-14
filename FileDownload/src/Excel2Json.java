@@ -12,11 +12,11 @@ import org.apache.poi.ss.usermodel.Row;
 public class Excel2Json {
 
 	public static void main(String[] args) throws IOException {
-		getExcelDataAsJsonObject("Sensor.xlsx");
+		getExcelDataAsJsonObject();
 	}
 
 	@SuppressWarnings("unchecked")
-	public static JSONObject getExcelDataAsJsonObject(String filePath) {
+	public static JSONObject getExcelDataAsJsonObject() {
 		JSONObject sheetsJsonObject = new JSONObject();
 		XSSFWorkbook workbook = null;
 		String sourceFilePath = "Sensor.xlsx";
@@ -24,13 +24,12 @@ public class Excel2Json {
 
 		try {
 			fileInputStream = new FileInputStream(sourceFilePath);
-			// Create an excel workbook
 			workbook = new XSSFWorkbook(fileInputStream);
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
 			JSONArray sheetArray = new JSONArray();
 			ArrayList<String> columnNames = new ArrayList<String>();
